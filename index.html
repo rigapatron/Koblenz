@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are you ready</title>
+    <style>
+        /* Zentriere den Inhalt horizontal und vertikal */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Ändere den Button-Stil */
+        button {
+            background-color: #BDBDBD; /* Hintergrundfarbe */
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px; /* Innenabstand oben und unten, links und rechts */
+        }
+
+        /* Ändere den Stil des Eingabefelds */
+        input[type="password"] {
+            padding: 8px;
+            border: 2px solid #ccc; /* Grauer Rand */
+            border-radius: 4px; /* Abgerundete Ecken */
+        }
+		
+		        a {
+            text-decoration: none; /* Keine Unterstreichung */
+            color: #848484; /* graue Farbe */
+        }
+    </style>
+</head>
+<body>
+    <h1> </h1>
+    
+    <!-- Eingabefeld für das Passwort -->
+    <input type="password" id="passwordInput">
+    <p><button onclick="checkPassword()">Enter Password</button></p>
+    
+    <!-- Link zur zweiten Seite (initial ausgeblendet) -->
+    <a href="seite2.html" id="linkToPage2" style="display: none;">Message from Control</a>
+
+    <script>
+        // Funktion zur Überprüfung des Passworts
+        function checkPassword() {
+            var passwordInput = document.getElementById("passwordInput").value;
+            
+            // Überprüfen Sie, ob das eingegebene Passwort "Koblenz" ist
+            if (passwordInput === "Koblenz") {
+                // Wenn das Passwort korrekt ist, zeigen Sie den Link zur zweiten Seite an
+                document.getElementById("linkToPage2").style.display = "block";
+            } else {
+                alert("Falsches Passwort. Bitte versuchen Sie es erneut.");
+            }
+        }
+    </script>
+</body>
+</html>
