@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aufstehen!</title>
+    <style>
+        /* Stil für den Textcontainer */
+        #text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Zentrieren Sie den Text vertikal in der Mitte des Bildschirms */
+            padding: 0 20px; /* Fügt links und rechts einen Abstand von 20px hinzu */
+        }
+
+        /* Stil für den Text */
+        #text {
+            font-size: 20px;
+            color: #848484;
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+		
+		#text2 {
+            font-size: 20px;
+            color: #848484;
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+
+
+        /* Stil für das Eingabefeld */
+        #input-container {
+            margin-top: 20px; /* Abstand nach dem Text */
+        }
+
+        /* Stil für den Link zu Seite 4 (initial ausgeblendet) */
+        #next-link {
+            display: none;
+            margin-top: 20px; /* Abstand nach dem Eingabefeld */
+            color: #007bff; /* Textfarbe des Links */
+            text-decoration: underline; /* Unterstreichung des Links */
+            cursor: pointer;
+        }
+		
+		/* Ändere den Stil des Eingabefelds */
+        input[type="text"] {
+            padding: 8px;
+            border: 2px solid #ccc; /* Grauer Rand */
+            border-radius: 4px; /* Abgerundete Ecken */
+			max-width: 1800px;
+        }
+		/* Ändere den Button-Stil */
+        button {
+            background-color: #ccc; /* Hintergrundfarbe */
+            border: none;
+            color: white;
+			height: 35px; /* Höhe des Buttons in Pixeln */
+			border-radius: 4px; /* Abgerundete Ecken */
+			font-weight: bold; /* Text im Button fett darstellen */
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px; /* Innenabstand oben und unten, links und rechts */
+        }
+		
+		table {
+            border-collapse: collapse; /* Entfernt die Abstände zwischen den Zellen */
+            width: 100%; /* 100% der verfügbaren Breite */
+        }
+
+        /* Stil für die Tabellenzellen */
+        td {
+            border: none; /* Keine Ränder */
+            padding: 10px; /* Innenabstand der Zellen */
+        }
+
+        /* Stil für die Hintergrundfarbe der ersten Spalte */
+        td:nth-child(1) {
+            background-color: #fff; /* Weiße Hintergrundfarbe */
+        }
+		
+		#aufzeichnung {
+            width: 50%; /* Breite des Textfelds */
+            height: 300px; /* Höhe des Textfelds */
+            background-color: #F7F2E0; /* Hintergrundfarbe des Textfelds */
+            border: none; /* Kein Rand */
+            padding: 20px; /* Innenabstand des Textfelds */
+			border-radius: 10px;
+        }
+		
+		.highlight {
+            font-weight: bold; /* Wörter fett darstellen */
+            color: blue; /* Farbe für hervorgehobene Wörter */
+        }
+		
+    </style>
+</head>
+<body>		
+
+       
+    </div>
+	
+	<div id="text-container">
+        <!-- Platzhalter für den Text -->
+        <div id="text">
+            
+        </div>
+		 <p> </p> 
+
+        <textarea id="aufzeichnung"  style="display: none;">
+		Datum: 10. August 1785,
+
+		Heute kehrte mein Bruder Joseph aus Pisa zurück, doch der 
+		Grund seiner Rückkehr ist von Trauer gezeichnet 
+		– unser Vater ist verstorben. Inmitten dieser düsteren 
+		Stimmung brachte er einen merkwürdigen 
+		Dolch mit, dessen Knauf eine runde Einkerbung trägt und aus
+		einem mir unbekannten Metall besteht.
+		Josephs langjähriges Interesse an antiken Gegenständen wird 
+		durch dieses Artefakt wohl noch weiter befeuert.
+		Das fing schon an als wir Kinder waren und unser Vater uns zum 
+		ersten Mal die alte Münze gezeigt hat, die sich seit 
+		vielen Jahren in unserem Famileinbesitz befindet.
+		
+		
+		Napoleon Bonaparte</textarea>
+		
+		<p> </p> 
+
+        <!-- Platzhalter für den zweiten schrittweise aufgebauten Text -->
+        <div id="text2">
+            
+        </div>
+		<div id="input-container">
+			<table>
+   
+			<tr>
+            <!-- Eingabefeld (initial ausgeblendet) -->
+            <td><input type="text" id="user-input" style="display: none;"> </td>
+			<td><button id="confirm-button" onclick="checkInput()" style="display: none;">></button></td>
+			<!-- Pfeil (initial ausgeblendet) -->
+			<div id="arrow"></div>
+			</tr>
+			</table>
+        </div>
+
+        
+    </div>
+
+    <script>
+
+
+		
+		var textContainer = document.getElementById("text");
+        var text2Container = document.getElementById("text2");
+        var aufzeichnung = document.getElementById("aufzeichnung");
+		var inputContainer = document.getElementById("input-container");
+		var userInput = document.getElementById("user-input");
+		var confirmButton = document.getElementById("confirm-button");
+		var arrow = document.getElementById("arrow");
+		var nextLink = document.getElementById("next-link");
+		
+        // Text, der schrittweise angezeigt wird
+        var textToDisplay = "Jungs, wir müssen weitermachen! Wir hoffen, ihr seid gestärkt und könnt die weiteren Aufgaben bewältigen. Wir haben noch folgenden Hinweis aus\n"
+							+" Quandt's Aufzeichnungen extrahieren können:";
+        var text2ToDisplay = "Koblenz war im Mittelalter bekannt für seine Münzprägung. Die sogenannte Kobler Münze gehörte zum Wahrzeichen \n"
+							+"der Stadt. Leider wissen wir nicht, für welches Kurfürstentum die Münzen hier geprägt wurden. Wir hoffen, dass \n"
+							+"ihr hier eine Antwort finden könnt: 50.36148883759165, 7.594470271911428. Für die Kurfürsten welcher Stadt wurden hier Münzen geprägt?";
+		//var textContainer = document.getElementById("text");
+        
+
+        // Index für den aktuellen Buchstaben
+                // Index für den aktuellen Buchstaben
+        var currentIndex = 0;
+        var currentIndex2 = 0;
+
+
+        // Funktion zur schrittweisen Anzeige des Texts
+        function displayText() {
+            if (currentIndex < textToDisplay.length) {
+                textContainer.innerHTML += textToDisplay.charAt(currentIndex);
+                currentIndex++;
+                setTimeout(displayText, 50); // Geschwindigkeit in Millisekunden (50ms = 0,05 Sekunden)
+            } else {
+                // Text wurde vollständig angezeigt, zeige das Textfeld "Aufzeichnung" an
+                aufzeichnung.style.display = "block";
+                displayText2(); // Starte die Anzeige des zweiten Texts
+            }
+        }
+		
+		// Funktion zur schrittweisen Anzeige des zweiten Texts
+        function displayText2() {
+            if (currentIndex2 < text2ToDisplay.length) {
+                text2Container.innerHTML += text2ToDisplay.charAt(currentIndex2);
+                currentIndex2++;
+                setTimeout(displayText2, 50); // Geschwindigkeit in Millisekunden (50ms = 0,05 Sekunden)
+            } else {
+				userInput.style.display = "block";
+				confirmButton.style.display = "block";
+            }
+        }
+
+        // Funktion zur Überprüfung der Eingabe und Anzeigen des Links zu Seite 4
+        function checkInput() {
+			/*var passwordInput = document.getElementById("passwordInput").value;*/
+            var userInputValue = userInput.value.toLowerCase();
+            var keywords = ["trier"];
+
+            if (keywords.some(keyword => userInputValue.includes(keyword))) {
+                // Eingabe enthält eines der Schlüsselwörter, zeige den Link zu Seite 4 an
+                /*nextLink.style.display = "block";*/
+				navigateToPage11();
+            } else {
+                // Eingabe enthält kein passendes Schlüsselwort, verstecke den Link zu Seite 4
+                nextLink.style.display = "none";
+            }
+        }
+
+        // Funktion zum Navigieren zur vierten Seite
+        function navigateToPage11() {
+            // Hier können Sie den Code zum Weiterleiten zur vierten Seite einfügen
+            window.location.href = 'seite11.html';
+        }
+
+        // Starten Sie die schrittweise Anzeige des Texts, wenn die Seite geladen ist
+        window.onload = function() {
+            displayText();
+        };
+
+        // Fügen Sie einen Event Listener hinzu, um die Eingabe zu überprüfen, wenn der Benutzer etwas eingibt
+        /*userInput.addEventListener("input", checkInput);*/
+		
+		// Fügen Sie einen Event Listener hinzu, um die Eingabe zu überprüfen, wenn der Benutzer den Button klickt
+		confirmButton.addEventListener("click", checkInput);
+    </script>
+</body>
+</html>

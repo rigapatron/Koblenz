@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is not a test</title>
+    <style>
+        /* Stil für den Textcontainer */
+        #text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+			padding: 0 50px;
+            align-items: center;
+            height: 100vh; /* Zentrieren Sie den Text vertikal in der Mitte des Bildschirms */
+        }
+
+        /* Stil für den Text */
+        #text {
+            font-size: 20px;
+            color: #848484;
+        }
+		
+		#next-button {
+			margin-top: 20px; /* Abstand nach dem Text */
+            background-color: #E6E6E6; /* Hintergrundfarbe */
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px; /* Innenabstand oben und unten, links und rechts */
+        }
+    </style>
+</head>
+<body>
+    <!-- Container für den schrittweise aufgebauten Text -->
+    <div id="text-container">
+        <!-- Platzhalter für den Text -->
+        <div id="text"></div>
+		<p><button id="next-button" onclick="navigateToPage3()" style="display: none;">Mission Egon</button></p>
+    </div>
+	
+    <script>
+	
+		// Elemente
+        var textContainer = document.getElementById("text");
+        var nextButton = document.getElementById("next-button");
+		
+        // Text, der schrittweise angezeigt werden soll
+        var textToDisplay = "Werte Zeitgenossen, mein Name ist Control und diese Nachricht kommt aus einer fernen Zukunft, die für die Menschheit eine Zeit des Wandels \n"
+							+ "und der Hoffnung bedeutet. Nach vielen schwierigen Zeiten und gesellschaftlichen Umbrüchen haben wir eine utopische Gesellschaft geschaffen, \n"
+							+ "die geprägt ist von Chancengleichheit, Freiheit und allgemeiner Toleranz. Es ist eine Zeit, in der Geld nicht mehr existiert und Macht nicht \n"
+							+ "mehr in den Händen weniger liegt, sondern von allen für alle ausgeübt wird. Doch dieser Wandel kam nicht ohne Opfer.  Die alten Familien, die \n"
+							+ "einst die Macht hielten, haben sich dieser Transformation nur widerstrebend gefügt. Dennoch konnten wir in kurzer Zeit erhebliche Fortschritte \n"
+							+ "erzielen. Einer der bahnbrechenden Entwicklungen ist das Zeitreisenprogramm, das wir aufbauen konnten. Egon Quandt, einer unserer führenden Köpfe \n"
+							+ "und ein Nachfahre einer dieser alten Familien, hat bedeutende Dienste im Zeitreisenprogramm geleistet. Seine Forschung und Experimente mit einem \n"
+							+ "extraterrestrischen Metall namens Chronium in Kombination mit Silber und Kupfer haben es ermöglicht, dass Zeitreisen Realität geworden sind. Leider \n"
+							+ "führte er eine unerlaubte Zeitreise durch und verschwand in der Vergangenheit. Unsere Berechnungen zeigen, dass er sich aktuell im Jahr 2023 aufhalten muss. Wir vermuten, dass er immer noch in dieser Zeit feststeckt, da er nicht genug Material für weitere Zeitreisen mitnehmen konnte. \n"
+							+ "Wir wissen nicht, was Egon Quandt in der Gegenwart plant, doch wir sind besorgt über die potenziellen Auswirkungen auf unsere Zukunft. Ihr seid unsere einzige Hoffnung, dieses Rätsel zu lösen. Ihr müsst herausfinden, was er vorhat und ob es unsere Zeitlinie gefährdet. Wir wissen, dass er in Koblenz am 28.09.2023 angekommen ist und dort bis zum 29.09.2023 blieb. Danach verliert sich seine Spur.\n"
+                            + "Eure Mission beginnt jetzt. Bewahrt unsere Zukunft, indem ihr die Geheimnisse der Vergangenheit enthüllt. Nehmt ihr die Mission an?";
+
+        // Element, in dem der Text angezeigt wird
+        var textContainer = document.getElementById("text");
+
+        // Index für den aktuellen Buchstaben
+        var currentIndex = 0;
+
+        // Funktion zur schrittweisen Anzeige des Texts
+        function displayText() {
+            if (currentIndex < textToDisplay.length) {
+                textContainer.innerHTML += textToDisplay.charAt(currentIndex);
+                currentIndex++;
+                setTimeout(displayText, 50); // Geschwindigkeit in Millisekunden (50ms = 0,05 Sekunden)
+            } else {
+                // Text wurde vollständig angezeigt, zeige den Button an
+                nextButton.style.display = "block";
+            }
+        }
+		
+		// Funktion zum Navigieren zur dritten Seite
+        function navigateToPage3() {
+            // Hier können Sie den Code zum Weiterleiten zur dritten Seite einfügen
+            window.location.href = 'seite3.html';
+        }
+
+        // Starten Sie die schrittweise Anzeige des Texts, wenn die Seite geladen ist
+        window.onload = function() {
+            displayText();
+        };
+    </script>
+</body>
+</html>

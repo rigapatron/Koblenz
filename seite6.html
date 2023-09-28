@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>o</title>
+    <style>
+        /* Stil für den Textcontainer */
+        #text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Zentrieren Sie den Text vertikal in der Mitte des Bildschirms */
+            padding: 0 20px; /* Fügt links und rechts einen Abstand von 20px hinzu */
+        }
+
+        /* Stil für den Text */
+        #text {
+            font-size: 20px;
+            color: #848484;
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+		
+		#text2 {
+            font-size: 20px;
+            color: #848484;
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+
+
+        /* Stil für das Eingabefeld */
+        #input-container {
+            margin-top: 20px; /* Abstand nach dem Text */
+        }
+
+        /* Stil für den Link zu Seite 4 (initial ausgeblendet) */
+        #next-link {
+            display: none;
+            margin-top: 20px; /* Abstand nach dem Eingabefeld */
+            color: #007bff; /* Textfarbe des Links */
+            text-decoration: underline; /* Unterstreichung des Links */
+            cursor: pointer;
+        }
+		
+		/* Ändere den Stil des Eingabefelds */
+        input[type="text"] {
+            padding: 8px;
+            border: 2px solid #ccc; /* Grauer Rand */
+            border-radius: 4px; /* Abgerundete Ecken */
+			max-width: 1800px;
+        }
+		/* Ändere den Button-Stil */
+        button {
+            background-color: #ccc; /* Hintergrundfarbe */
+            border: none;
+            color: white;
+			height: 35px; /* Höhe des Buttons in Pixeln */
+			border-radius: 4px; /* Abgerundete Ecken */
+			font-weight: bold; /* Text im Button fett darstellen */
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px; /* Innenabstand oben und unten, links und rechts */
+        }
+		
+		table {
+            border-collapse: collapse; /* Entfernt die Abstände zwischen den Zellen */
+            width: 100%; /* 100% der verfügbaren Breite */
+        }
+
+        /* Stil für die Tabellenzellen */
+        td {
+            border: none; /* Keine Ränder */
+            padding: 10px; /* Innenabstand der Zellen */
+        }
+
+        /* Stil für die Hintergrundfarbe der ersten Spalte */
+        td:nth-child(1) {
+            background-color: #fff; /* Weiße Hintergrundfarbe */
+        }
+		
+		#aufzeichnung {
+            width: 40%; /* Breite des Textfelds */
+            height: 400x; /* Höhe des Textfelds */
+            background-image: url('oldpaper.jpg');
+            border: none; /* Kein Rand */
+            padding: 20px; /* Innenabstand des Textfelds */
+			border-radius: 10px;
+			font-family: 'Courier New', Courier, monospace; /* Schriftart für den Tagebuch-Look */
+			color: #000000; /* Gedämpfte Graufarbe */
+			opacity: 0.7; /* Hier ist die Transparenz 0.6 (50%) */
+			font-weight: bold; /* Wörter fett darstellen */
+        }
+		
+		.highlight {
+            font-weight: bold; /* Wörter fett darstellen */
+            color: blue; /* Farbe für hervorgehobene Wörter */
+        }
+		
+    </style>
+</head>
+<body>		
+
+       
+    </div>
+	
+	<div id="text-container">
+        <!-- Platzhalter für den Text -->
+        <div id="text">
+            
+        </div>
+		 <p> </p> 
+
+        <div id="aufzeichnung" contentEditable="true" style="display: none;">
+        <p>Sehr geehrter Hauptmann Rothstetten,</p>
+		<p>Ich freue mich, Ihnen mitteilen zu können, dass <br> 
+		ich das Rätsel gelöst habe! Napoleon war der Schlüssel.<br>
+		Die Münze, nach der wir gesucht haben, befindet sich in<br> 
+		Russland. Es ist von äußerster Wichtigkeit, dass wir alles<br>
+		in unserer Macht Stehende unternehmen, um sie zu erhalten.<br>
+		Diese Münze ist unerlässlich für unsere Bewegung!</p>
+		
+		<p>Mit höchstem Respekt,</p>
+		<p>E. J. Quandt, Dezember 1939</p>
+        
+		</div>
+		
+		<p> </p> 
+
+        <!-- Platzhalter für den zweiten schrittweise aufgebauten Text -->
+        <div id="text2">
+            
+        </div>
+		<div id="input-container">
+			<table>
+   
+			<tr>
+            <!-- Eingabefeld (initial ausgeblendet) -->
+            <td><input type="text" id="user-input" style="display: none;"> </td>
+			<td><button id="confirm-button" onclick="checkInput()" style="display: none;">></button></td>
+			<!-- Pfeil (initial ausgeblendet) -->
+			<div id="arrow"></div>
+			</tr>
+			</table>
+        </div>
+
+        
+    </div>
+
+    <script>
+
+
+		
+		var textContainer = document.getElementById("text");
+        var text2Container = document.getElementById("text2");
+        var aufzeichnung = document.getElementById("aufzeichnung");
+		var inputContainer = document.getElementById("input-container");
+		var userInput = document.getElementById("user-input");
+		var confirmButton = document.getElementById("confirm-button");
+		var arrow = document.getElementById("arrow");
+		var nextLink = document.getElementById("next-link");
+		
+        // Text, der schrittweise angezeigt wird
+        var textToDisplay = "Sehr gut, wir konnten ein weiteres Dokument entschlüsseln. Noch wissen wir nicht, was es zu bedeuten hat. Aber wir sind auf der richtigen Spur";
+        var text2ToDisplay = "Unsere Technicker konnten triangulieren, dass sich Egon Quandt und Albert Findler in der Bar Excalibur \n"
+							 +"zur selben Zeit befanden. Sie haben sich ein wenig unterhalten, bis Quandt zwei Whiskey on the Rocks \n"
+							 +"bestellt hat. Die Getränke wurden gebracht. Quandt hat darauf hin sein Glas geleert, sich verabschiedet und ist \n"
+							 +"gegangen. Nach etwa 30 min ist Findler tot zusammengebrochen. Das merkwürdige ist, dass Findler die ganze Zeit über \n"
+							 +" sein Glas in der Hand behielt, Quandt konnte also nichts in das Glas mischen. Ebenso hat Findler sein Glas zuerst gewählt. \n"
+							 +" Er hätte genauso gut auch das andere Glas wählen können. In der selben Nacht wurde in Findlers Wohnung eingebrochen. \n"
+							 +" Es wurde nichts als gestohlen gemeldet, aber wir vermuten, dass Quandt die Gelegenheit genutzt hat, diese Münze zu stehlen. \n"
+							 + " Die Frage bleibt jeoch: Wie hat er den Mord begangen?";
+		//var textContainer = document.getElementById("text");
+        
+
+        // Index für den aktuellen Buchstaben
+                // Index für den aktuellen Buchstaben
+        var currentIndex = 0;
+        var currentIndex2 = 0;
+
+
+        // Funktion zur schrittweisen Anzeige des Texts
+        function displayText() {
+            if (currentIndex < textToDisplay.length) {
+                textContainer.innerHTML += textToDisplay.charAt(currentIndex);
+                currentIndex++;
+                setTimeout(displayText, 50); // Geschwindigkeit in Millisekunden (50ms = 0,05 Sekunden)
+            } else {
+                // Text wurde vollständig angezeigt, zeige das Textfeld "Aufzeichnung" an
+                aufzeichnung.style.display = "block";
+                displayText2(); // Starte die Anzeige des zweiten Texts
+            }
+        }
+		
+		// Funktion zur schrittweisen Anzeige des zweiten Texts
+        function displayText2() {
+            if (currentIndex2 < text2ToDisplay.length) {
+                text2Container.innerHTML += text2ToDisplay.charAt(currentIndex2);
+                currentIndex2++;
+                setTimeout(displayText2, 50); // Geschwindigkeit in Millisekunden (50ms = 0,05 Sekunden)
+            } else {
+				userInput.style.display = "block";
+				confirmButton.style.display = "block";
+            }
+        }
+
+        // Funktion zur Überprüfung der Eingabe und Anzeigen des Links zu Seite 4
+        function checkInput() {
+			/*var passwordInput = document.getElementById("passwordInput").value;*/
+            var userInputValue = userInput.value.toLowerCase();
+            var keywords = ["eiswürfel"];
+
+            if (keywords.some(keyword => userInputValue.includes(keyword))) {
+                // Eingabe enthält eines der Schlüsselwörter, zeige den Link zu Seite 4 an
+                /*nextLink.style.display = "block";*/
+				navigateToPage7();
+            } else {
+                // Eingabe enthält kein passendes Schlüsselwort, verstecke den Link zu Seite 4
+                nextLink.style.display = "none";
+            }
+        }
+
+        // Funktion zum Navigieren zur vierten Seite
+        function navigateToPage7() {
+            // Hier können Sie den Code zum Weiterleiten zur vierten Seite einfügen
+            window.location.href = 'seite7.html';
+        }
+
+        // Starten Sie die schrittweise Anzeige des Texts, wenn die Seite geladen ist
+        window.onload = function() {
+            displayText();
+        };
+
+        // Fügen Sie einen Event Listener hinzu, um die Eingabe zu überprüfen, wenn der Benutzer etwas eingibt
+        /*userInput.addEventListener("input", checkInput);*/
+		
+		// Fügen Sie einen Event Listener hinzu, um die Eingabe zu überprüfen, wenn der Benutzer den Button klickt
+		confirmButton.addEventListener("click", checkInput);
+    </script>
+</body>
+</html>

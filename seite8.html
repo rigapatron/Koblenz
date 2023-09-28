@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schachproblem</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .schachbrett {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            gap: 2px;
+        }
+
+        .feld {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .dame {
+            color: #d00;
+            font-size: 30px;
+        }
+		a {
+            color: #000000; /* Textfarbe auf Blau setzen */
+            font-weight: bold; /* Textdicke auf fett setzen */
+            text-decoration: none; /* Unterstreichung entfernen (optional) */
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>Schachproblem - Setzen Sie 8 Damen so,<br> dass sie sich nicht schlagen können!</h2>
+        <div class="schachbrett">
+            <div v-for="(feld, index) in felder" :key="index" class="feld" @click="platziereDame(index)">
+                <span v-if="damenPositionen.includes(index)" class="dame">♛</span>
+            </div>
+        </div>
+        <button @click="pruefeAufstellung">Prüfen</button>
+        <p v-if="ergebnis">Die Damen sind korrekt aufgestellt! <a href="seite9.html" >Message from Control</a></p>
+        <p v-if="!ergebnis && ergebnis !== null">Die Damen sind nicht korrekt aufgestellt. Bitte erneut versuchen.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                felder: Array(64).fill(null).map((_, index) => index),
+                damenPositionen: [],
+                ergebnis: null
+            },
+            methods: {
+                platziereDame(index) {
+                    if (!this.damenPositionen.includes(index)) {
+                        this.damenPositionen.push(index);
+                    } else {
+                        this.damenPositionen = this.damenPositionen.filter(pos => pos !== index);
+                    }
+                },
+                pruefeAufstellung() {
+                    this.ergebnis = this.istKorrekt(this.damenPositionen);
+                },
+                istKorrekt(damenPositionen) {
+                    // Implementieren Sie hier die Logik zur Überprüfung der Damen-Aufstellung
+                    return damenPositionen.length === 8;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
